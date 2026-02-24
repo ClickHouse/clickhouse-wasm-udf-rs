@@ -1,0 +1,15 @@
+[package]
+name = "clickhouse-wasm-udf-macros"
+version = "0.1.0"
+edition = "2024"
+description = "Procedural macros for clickhouse-wasm-udf"
+license = "Apache-2.0"
+repository = "https://github.com/vdimir/chwasmudf"
+
+[dependencies]
+syn = { version = "2.0.77", features = ["full"] }
+quote = "1.0.37"
+proc-macro2 = "1.0.86"
+
+[lib]
+proc-macro = true
