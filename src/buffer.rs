@@ -9,7 +9,7 @@
 
 /// A contiguous byte buffer whose memory is owned by this WASM module.
 #[repr(C)]
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct RawBuffer {
     pub ptr: *const u8,
     pub len: usize,
@@ -44,8 +44,13 @@ pub extern "C" fn clickhouse_create_buffer(size: usize) -> *mut RawBuffer {
 /// Frees a buffer previously allocated by [`clickhouse_create_buffer`].
 ///
 /// Called by the ClickHouse host after it has finished reading the UDF output.
+///
+/// # Safety
+///
+/// `ptr` must be a pointer previously returned by [`clickhouse_create_buffer`]
+/// and must not have been freed already.
 #[unsafe(no_mangle)]
-pub extern "C" fn clickhouse_destroy_buffer(ptr: *mut RawBuffer) {
+pub unsafe extern "C" fn clickhouse_destroy_buffer(ptr: *mut RawBuffer) {
     if ptr.is_null() {
         return;
     }
