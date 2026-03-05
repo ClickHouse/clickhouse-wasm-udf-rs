@@ -15,7 +15,13 @@ pub fn parse_pem(data: String) -> anyhow::Result<HashMap<String, String>> {
         ("version".into(), tbs.version.0.to_string()),
         ("issuer".into(), tbs.issuer.to_string()),
         ("subject".into(), tbs.subject.to_string()),
-        ("not_before".into(), tbs.validity.not_before.timestamp().to_string()),
-        ("not_after".into(), tbs.validity.not_after.timestamp().to_string()),
+        (
+            "not_before".into(),
+            tbs.validity.not_before.timestamp().to_string(),
+        ),
+        (
+            "not_after".into(),
+            tbs.validity.not_after.timestamp().to_string(),
+        ),
     ]))
 }

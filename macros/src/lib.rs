@@ -1,7 +1,7 @@
 extern crate proc_macro;
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{parse_macro_input, ItemFn};
+use syn::{ItemFn, parse_macro_input};
 
 fn returns_result(output: &syn::ReturnType) -> bool {
     if let syn::ReturnType::Type(_, ty) = output {
