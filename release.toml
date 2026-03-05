@@ -1,0 +1,9 @@
+allow-branch = ["main"]
+
+# Automatically upgrade the version in dependent workspace crates
+dependent-version = "upgrade"
+
+# Update the version example in README on each release
+pre-release-replacements = [
+    { file = "README.md", search = "clickhouse-wasm-udf = \"[0-9.]+\"", replace = "clickhouse-wasm-udf = \"{{version}}\"" },
+]
