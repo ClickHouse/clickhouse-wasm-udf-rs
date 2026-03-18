@@ -2,6 +2,18 @@
 
 Rust SDK for writing [ClickHouse WASM UDFs](https://clickhouse.com/docs/en/sql-reference/functions/wasm_udf).
 
+[![Crates.io][crates-badge]][crates-url]
+[![Documentation][docs-badge]][docs-url]
+[![Build Status][actions-badge]][actions-url]
+
+[crates-badge]: https://img.shields.io/crates/v/clickhouse-wasm-udf.svg
+[crates-url]: https://crates.io/crates/clickhouse-wasm-udf
+[docs-badge]: https://docs.rs/clickhouse-wasm-udf/badge.svg
+[docs-url]: https://docs.rs/clickhouse-wasm-udf
+[actions-badge]: https://github.com/ClickHouse/clickhouse-wasm-udf-rs/actions/workflows/ci.yml/badge.svg
+[actions-url]: https://github.com/ClickHouse/clickhouse-wasm-udf-rs/actions/workflows/ci.yml
+
+
 ## Setup
 
 Create a new library crate:

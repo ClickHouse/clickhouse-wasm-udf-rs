@@ -99,19 +99,28 @@ pub use clickhouse_wasm_udf_macros::clickhouse_udf;
 
 /// Writes a formatted message to the ClickHouse server log.
 ///
-/// Accepts the same format string syntax as [`format!`].
+/// Accepts an optional [`LogLevel`](host_api::LogLevel) as the first argument
+/// (defaults to `Trace`), followed by the same format string syntax as
+/// [`format!`].
 ///
-/// # Example
+/// # Examples
 ///
 /// ```ignore
+/// use clickhouse_wasm_udf::host_api::LogLevel;
+///
 /// ch_log!("processing {} rows", num_rows);
+/// ch_log!(LogLevel::Debug, "processing {} rows", num_rows);
 /// ```
 #[macro_export]
 macro_rules! ch_log {
+    ($level:expr, $($arg:tt)*) => {{
+        let s = format!($($arg)*);
+        $crate::host_api::log($level, &s);
+    }};
     ($($arg:tt)*) => {{
         let s = format!($($arg)*);
-        $crate::host_api::log(&s);
-    }}
+        $crate::host_api::log($crate::host_api::LogLevel::Trace, &s);
+    }};
 }
 
 /// Aborts the current UDF call with a formatted error message.
