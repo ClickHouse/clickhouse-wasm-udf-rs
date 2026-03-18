@@ -34,7 +34,7 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-clickhouse-wasm-udf = "0.1"
+clickhouse-wasm-udf = "0.2.0"
 ```
 
 Set the default build target in `.cargo/config.toml`:
