@@ -1,15 +1,11 @@
 //! Bindings to the ClickHouse host functions available inside a WASM UDF.
 //!
 //! These functions are provided by the ClickHouse runtime and are only
-//! available when running inside a WASM module. Prefer the [`ch_log!`] and
-//! [`ch_fatal!`] macros over calling [`log`] and [`fatal`] directly.
-//!
-//! [`ch_log!`]: crate::ch_log
-//! [`ch_fatal!`]: crate::ch_fatal
+//! available when running inside a WASM module.
 
 use std::ffi::c_char;
 
-/// Log level for messages sent via [`log`] / [`ch_log!`](crate::ch_log).
+/// Log level for messages sent via [`log`]
 ///
 /// Maps to `Poco::Message::Priority` on the server side.
 /// The server clamps values to the `Warning..=Trace` range.

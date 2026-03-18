@@ -76,18 +76,18 @@
 //! }
 //! ```
 //!
-//! [`ch_log!`] and [`ch_fatal!`] are still available for unconditional logging
+//! [`ch_log_trace!`] and [`ch_fatal!`] are still available for unconditional logging
 //! or aborting outside of the `?` pattern:
 //!
 //! ```ignore
-//! use clickhouse_wasm_udf::{ch_log, ch_fatal, clickhouse_udf};
+//! use clickhouse_wasm_udf::{ch_log_trace, ch_fatal, clickhouse_udf};
 //!
 //! #[clickhouse_udf]
 //! fn safe_div(a: f64, b: f64) -> f64 {
 //!     if b == 0.0 {
 //!         ch_fatal!("division by zero");
 //!     }
-//!     ch_log!("computing {a} / {b}");
+//!     ch_log_trace!("computing {a} / {b}");
 //!     a / b
 //! }
 //! ```
@@ -97,30 +97,21 @@ pub mod host_api;
 
 pub use clickhouse_wasm_udf_macros::clickhouse_udf;
 
-/// Writes a formatted message to the ClickHouse server log.
+/// Writes a trace-level message to the ClickHouse server log.
 ///
-/// Accepts an optional [`LogLevel`](host_api::LogLevel) as the first argument
-/// (defaults to `Trace`), followed by the same format string syntax as
-/// [`format!`].
+/// Accepts the same format string syntax as [`format!`].
 ///
-/// # Examples
+/// # Example
 ///
 /// ```ignore
-/// use clickhouse_wasm_udf::host_api::LogLevel;
-///
-/// ch_log!("processing {} rows", num_rows);
-/// ch_log!(LogLevel::Debug, "processing {} rows", num_rows);
+/// ch_log_trace!("processing {} rows", num_rows);
 /// ```
 #[macro_export]
-macro_rules! ch_log {
-    ($level:expr, $($arg:tt)*) => {{
-        let s = format!($($arg)*);
-        $crate::host_api::log($level, &s);
-    }};
+macro_rules! ch_log_trace {
     ($($arg:tt)*) => {{
         let s = format!($($arg)*);
         $crate::host_api::log($crate::host_api::LogLevel::Trace, &s);
-    }};
+    }}
 }
 
 /// Aborts the current UDF call with a formatted error message.

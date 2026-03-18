@@ -65,19 +65,19 @@ fn greet(name: String) -> Result<String, String> {
 ### Logging and errors
 
 ```rust
-use clickhouse_wasm_udf::{ch_log, ch_fatal, clickhouse_udf};
+use clickhouse_wasm_udf::{ch_log_trace, ch_fatal, clickhouse_udf};
 
 #[clickhouse_udf]
 fn safe_div(a: f64, b: f64) -> f64 {
     if b == 0.0 {
         ch_fatal!("division by zero");
     }
-    ch_log!("computing {a} / {b}");
+    ch_log_trace!("computing {a} / {b}");
     a / b
 }
 ```
 
-`ch_log!` writes to the ClickHouse server log. `ch_fatal!` aborts the call and
+`ch_log_trace!` writes to the ClickHouse server log. `ch_fatal!` aborts the call and
 reports an error.
 
 ## Building
