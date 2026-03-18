@@ -57,7 +57,7 @@ pub fn clickhouse_udf(_attr: TokenStream, item: TokenStream) -> TokenStream {
             use ::clickhouse_wasm_udf::buffer::RawBuffer;
 
             if data.ptr.is_null() || data.len == 0 {
-                ::clickhouse_wasm_udf::ch_log!("Input data is empty");
+                ::clickhouse_wasm_udf::ch_log_trace!("Input data is empty");
                 return std::ptr::null();
             }
 
