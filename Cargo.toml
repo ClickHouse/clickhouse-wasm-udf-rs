@@ -23,6 +23,11 @@ readme = "README.md"
 keywords = ["clickhouse", "wasm", "udf", "webassembly"]
 categories = ["wasm", "database"]
 
+[package.metadata.release]
+pre-release-replacements = [
+    { file = "README.md", search = "clickhouse-wasm-udf = \"[0-9.]+\"", replace = "clickhouse-wasm-udf = \"{{version}}\"" },
+]
+
 [package.metadata.docs.rs]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
