@@ -19,6 +19,7 @@ pub enum LogLevel {
     Trace = 8,
 }
 
+#[link(wasm_import_module = "env")]
 unsafe extern "C" {
     pub fn clickhouse_log(level: u32, s: *const c_char, len: usize);
     pub fn clickhouse_throw(s: *const c_char, len: usize) -> !;
